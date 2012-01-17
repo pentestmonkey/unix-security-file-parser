@@ -50,7 +50,7 @@
 		
 		<head>
 			<div id="frontpage">
-				<h1><p>Unix Privilege Escalation Report</p> <p>Audit of Host: </p><p><xsl:value-of select="scaninfo/hostname"/></p></h1>
+				<h1><p>Unix Security Report</p> <p>Audit of Host: </p><p><xsl:value-of select="scaninfo/hostname"/></p></h1>
 			</div>
 		</head>
 		
