@@ -611,7 +611,7 @@ issue_template = {
     },
                   
     'UPC513': {
-       'title': "World Writeable Directory (not sticky bit)",
+       'title': "World Writeable Directory (sticky bit not set)",
        'description': '''TODO''',
        'recommendation': '''TODO''',
        'supporting_data': {
@@ -688,6 +688,17 @@ issue_template = {
        }
     },
                   
+    'UPC520': {
+       'title': "Scripting Language Installed",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
     'UPC5': {
        'title': "TODO",
        'description': '''TODO''',

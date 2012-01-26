@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from upc.parser.sshd_config import sshd_config
 from upc.parser.sudoers import sudoers
 from upc.parser.passwd import passwd
@@ -68,11 +69,13 @@ if options.directory:
             s = shadow()
             s.parse(f, issues, knowledge_base())
     
-        m = re.search("passwd$", f)
+        m = re.search("/passwd$", f)
         if m:
-            print "[+] Parsing %s as passwd file" % f
-            s = passwd()
-            s.parse(f, issues, knowledge_base())
+            m2 = re.search("security/passwd$", f)
+            if not m2:
+                print "[+] Parsing %s as passwd file" % f
+                s = passwd()
+                s.parse(f, issues, knowledge_base())
     
         m = re.search("/upc(?:-[^/]+)$", f)
         if m:

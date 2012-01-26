@@ -56,18 +56,18 @@ class parser:
         
         # TODO move this somewhere
         regexp = {}
-        regexp['world_writeable'] = '\s.[r-][w-][xsS][r-][w-][xsS][r-]w[xtT]\s'
-        regexp['world_readable']  = '\s.[r-][w-][xsS][r-][w-][xsS]r[w-][xtT]\s'
-        regexp['file']            = '\s-[r-][w-][xsS][r-][w-][xsS][r-][w-][xtT]\s'
-        regexp['directory']       = '\sd[r-][w-][xsS][r-][w-][xsS][r-][w-][xtT]\s'
-        regexp['sticky']          = '\s.[r-][w-][xsS][r-][w-][xsS][r-][w-][tT]\s'
-        regexp['suid']            = '\s.[r-][w-][sS][r-][w-][xsS][r-][w-][xtT]\s'
-        regexp['sgid']            = '\s.[r-][w-][xsS][r-][w-][sS][r-][w-][xtT]\s'
+        regexp['world_writeable'] = '\s.[r-][w-][xsS-][r-][w-][xsS-][r-]w[xtT-]\s'
+        regexp['world_readable']  = '\s.[r-][w-][xsS-][r-][w-][xsS-]r[w-][xtT-]\s'
+        regexp['file']            = '\s-[r-][w-][xsS-][r-][w-][xsS-][r-][w-][xtT-]\s'
+        regexp['directory']       = '\sd[r-][w-][xsS-][r-][w-][xsS-][r-][w-][xtT-]\s'
+        regexp['sticky']          = '\s.[r-][w-][xsS-][r-][w-][xsS-][r-][w-][tT]\s'
+        regexp['suid']            = '\s.[r-][w-][sS][r-][w-][xsS-][r-][w-][xtT-]\s'
+        regexp['sgid']            = '\s.[r-][w-][xsS-][r-][w-][sS][r-][w-][xtT-]\s'
         
         eregexp = {}
         eregexp['min_size'] = '\d+\s+\d+\s+..........\s+\d+\s+\S+\s+\S+\s+(\d+)\s+?\S+\s+\S+\s+\S+\s+/'
 
-        allowed_opts = ["matches", "ignore", "min_size"]        
+        allowed_opts = ["matches", "ignore", "min_size", "custom_re"]        
         # This odd-looking construction is apparently quite fast
         # http://effbot.org/zone/readline-performance.htm
         while 1:
@@ -97,13 +97,19 @@ class parser:
                                     break
 
                         if matched and opt == "min_size":
-                            #print "[D] min"
                             m = re.search(eregexp[opt], line)
                             if m:
                                 size = m.group(1)
                                 if int(size) < int(opts["min_size"]):
                                     matched = 0
                                     break
+
+                        if matched and opt == "custom_re":
+                            #print "[D] Custom"
+                            m = re.search(opts[opt], line)
+                            if not m:
+                                matched = 0
+                                break
 
                 if matched:
                     fso = fsobj();

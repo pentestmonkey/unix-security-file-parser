@@ -13,7 +13,7 @@ class permissions(parser):
 		
 		#fsobjs = self.query_perms(filename, {"matches": ["world_writeable"]})
 		
-		for f in self.query_perms(filename, {"min_size": 500000, "matches": ["file", "world_readable"]}):
+		for f in self.query_perms(filename, {"min_size": 20000000, "matches": ["file", "world_readable"]}):
 			self.report.get_by_id("UPC519").add_supporting_data('text_line', [self.kb_global, f.get_line()])
 
 		for f in self.query_perms(filename, {"matches": ["world_writeable", "directory"], "ignore": ["sticky"]}):
@@ -37,6 +37,13 @@ class permissions(parser):
 
 		for f in self.query_perms(filename, {"matches": ["sgid", "directory"]}):
 			self.report.get_by_id("UPC517").add_supporting_data('text_line', [self.kb_global, f.get_line()])
+
+		for prog in ("perl", "python", "java", "tcl", "ruby"):
+			for f in self.query_perms(filename, {"matches": ["file"], "custom_re": ("/%s$" % prog)}):
+				self.report.get_by_id("UPC520").add_supporting_data('text_line', [self.kb_global, f.get_line()])
+
+		# TODO compilers
+		# TODO files that probably contains passwords or other useful info
 
 		# world writeable files
 		# world writeable directories
