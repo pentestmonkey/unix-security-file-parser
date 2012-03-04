@@ -699,23 +699,78 @@ issue_template = {
           },
        }
     },
-    'UPC5': {
-       'title': "TODO",
+    'UPC521': {
+       'title': "Compiler Installed",
        'description': '''TODO''',
        'recommendation': '''TODO''',
        'supporting_data': {
-          'TODO': {
+          'text_line': {
              'section': "description",
              'preamble': "TODO:",
           },
        }
     },
-    'UPC5': {
-       'title': "TODO",
+    'UPC522': {
+       'title': "IPv6 Enabled",
        'description': '''TODO''',
        'recommendation': '''TODO''',
        'supporting_data': {
-          'TODO': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC523': {
+       'title': "Filesystem Entries With Unknown Owner",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC524': {
+       'title': "Filesystem Entries With Unknown Group",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC525': {
+       'title': "IPv6 Enabled",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC526': {
+       'title': "IPv6 Enabled",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC527': {
+       'title': "IPv6 Enabled",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
              'section': "description",
              'preamble': "TODO:",
           },

@@ -63,6 +63,8 @@ class parser:
         regexp['sticky']          = '\s.[r-][w-][xsS-][r-][w-][xsS-][r-][w-][tT]\s'
         regexp['suid']            = '\s.[r-][w-][sS][r-][w-][xsS-][r-][w-][xtT-]\s'
         regexp['sgid']            = '\s.[r-][w-][xsS-][r-][w-][sS][r-][w-][xtT-]\s'
+        regexp['unknown_owner']   = '\s.[r-][w-][xsS-][r-][w-][xsS-][r-][w-][xtT-]\s+\d+\s+\d+'
+        regexp['unknown_group']   = '\s.[r-][w-][xsS-][r-][w-][xsS-][r-][w-][xtT-]\s+\d+\s+\S+\s+\d+'
         
         eregexp = {}
         eregexp['min_size'] = '\d+\s+\d+\s+..........\s+\d+\s+\S+\s+\S+\s+(\d+)\s+?\S+\s+\S+\s+\S+\s+/'
@@ -111,10 +113,22 @@ class parser:
                                 matched = 0
                                 break
 
+                # Need further checking for unkown_owner and unknown_group
                 if matched:
                     fso = fsobj();
-                    r = fso.parse_from_find_line(line) 
+                    r = fso.parse_from_find_line(line)
+                    
                     if r:
+                        if "unknown_owner" in opts['matches']:
+                            if self.kb.find_uid_from_name(fso.get_attr("owner")):
+                                matched = 0
+                                break
+                            
+                        if "unknown_group" in opts['matches']:
+                            if self.kb.find_gid_from_name(r.fso.get_attr("group")):
+                                matched = 0
+                                break
+                        
                         yield fso
     
     def add_issue(self, title):

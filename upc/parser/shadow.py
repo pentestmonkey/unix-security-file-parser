@@ -4,14 +4,32 @@ import re
 class shadow(parser):
 	def __init__(self):
 		self.issues = []
+	
+	def detect_format(self, filename):
+		is_linux = 1
+		is_aix = 1
 		
+		lines = self.slurpfile(filename, {"remove_blanklines": 1, "trim": 1})
+		for line in lines:
+			fields = line.split(":")
+			if not len(fields) == 9:
+				is_linux = 0
+				break
+		
+		if is_linux:
+			return "linux"
+		
+		# TODO
+		#f = open(filename, 'r')
+		#s = f.read()
+		#fields = s.split()
+		#pass
+	
 	def parse(self, filename, report, kb):
 		self.report = report
-		self.kb_local = kb.register_section("shadow")
-		self.kb_global = kb
-		self.kb_local.register_string("filename")
-		self.kb_local.add_info("filename", filename)
-		
+		self.kb = kb
+		self.kb.register_file(filename)
+	
 		lines = self.slurpfile(filename, {"remove_blanklines": 1, "trim": 1})
 		
 		crypt_std_des_used = 0
@@ -24,18 +42,31 @@ class shadow(parser):
 				
 		for line in lines:
 			fields = line.split(":")
-			# tomcat6:x:134:140::/usr/share/tomcat6:/bin/false
-			# field 0: user 
-			# field 1: pass
-			# field 2: uid
-			# field 3: gid
-			# field 4: ?
-			# field 5: homedir
-			# field 6: shell
+			
+			fields = line.split(":")
+			user             = fields[0]
+			password         = fields[1]
+			password_changed = fields[2]
+			min_age          = fields[3]
+			max_age          = fields[4]
+			warn_days        = fields[5]
+			grace_period     = fields[6]
+			expiry_date      = fields[7]
+			reserved         = fields[8]
+			
+			self.kb.data["user"][user] = {}
+			self.kb.data["user"][user]["shadow_password"] = password
+			self.kb.data["user"][user]["password_changed"] = password_changed
+			self.kb.data["user"][user]["min_age"] = min_age
+			self.kb.data["user"][user]["max_age"] = max_age
+			self.kb.data["user"][user]["warn_days"] = warn_days
+			self.kb.data["user"][user]["grace_period"] = grace_period
+			self.kb.data["user"][user]["expiry_date"] = expiry_date
+			self.kb.data["user"][user]["reserved"] = reserved
 			
 			# Blank password
 			if fields[1] == "":
-				self.report.get_by_id("UPC510").add_supporting_data('text_line', [self.kb_global, line])
+				self.report.get_by_id("UPC510").add_supporting_data('text_line', [self.kb, line])
 				
 			# Record which hash types are used
 			elif re.search("^[\./0-9A-Za-z]{9}$", fields[1]):
@@ -60,9 +91,9 @@ class shadow(parser):
 				sha512_used = 1
 				
 			elif fields[1] != "!" and fields[1] != "*":
-				self.report.get_by_id("UPC511").add_supporting_data('text_line', [self.kb_global, line])
+				self.report.get_by_id("UPC511").add_supporting_data('text_line', [self.kb, line])
 				
 		# Mixture of hashes used
 		if crypt_std_des_used + crypt_ext_des_used + md5_hash_used + blowfish2_used + blowfish2a_used + sha256_used + sha512_used > 1:
-			self.report.get_by_id("UPC512").add_supporting_data('none', [self.kb_global])
+			self.report.get_by_id("UPC512").add_supporting_data('none', [self.kb])
 				

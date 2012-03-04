@@ -13,11 +13,13 @@ def parseOptions():
     report  = OptionGroup(parser, "report-options", "Reporting options")
 
     fileopts.add_option("-p", "--passwd",      dest = "passwd_file",      default = False, help = "/etc/passwd file")
+    fileopts.add_option("-g", "--group",       dest = "group_file",       default = False, help = "/etc/group file")
     fileopts.add_option("-s", "--shadow",      dest = "shadow_file",      default = False, help = "/etc/shadow file")
     fileopts.add_option("-S", "--sudoers",     dest = "sudoers_file",     default = False, help = "/etc/sudoers file")
     fileopts.add_option("-P", "--perms",       dest = "perms_file",       default = False, help = "Output of: find / -ls")
     fileopts.add_option("-H", "--sshd_config", dest = "sshd_config_file", default = False, help = "/etc/ssh/sshd_config")
     fileopts.add_option("-u", "--upc",         dest = "upc_file",         default = False, help = "Output of: unix-privesc-check standard|detailed")
+    fileopts.add_option("-i", "--ifconfig",    dest = "ifconfig_file",    default = False, help = "Output of: ifconfig -a")
 
     bulkopts.add_option("-d", "--directory",   dest = "directory",   help = "Guess files to parse in given directory (don't use /!)")
     bulkopts.add_option("-t", "--tarball",     dest = "tarball",     help = "Unpack tar ball and guess files to parse")
@@ -36,7 +38,7 @@ def parseOptions():
     fileopt_used = 0
     bulkopt_used = 0
     
-    if options.passwd_file or options.shadow_file or options.sudoers_file or options.perms_file or options.sshd_config_file or options.upc_file:
+    if options.group_file or options.ifconfig_file or options.passwd_file or options.shadow_file or options.sudoers_file or options.perms_file or options.sshd_config_file or options.upc_file:
         fileopt_used = 1
     
     if options.directory or options.tarball:
