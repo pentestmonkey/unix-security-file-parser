@@ -35,23 +35,16 @@ class knowledge_base():
         return None
     
     def find_name_from_gid(self, gid):
-        print "[D]: called find_name_from_gid"
-        print self.data["group"]
         for g in self.data["group"].keys():
-            print "[D] find_name_from_gid: checking if group %s is gid %s" % (g, gid)
             if self.data["group"][g]["gid"] == gid:
                 return g
-        print "[D] left find_name_from_gid"
         return None
     
     def add_user_to_gid(self, gid, user):
-        print "[D] add_user_to_gid passed %s, %s" % (gid, user)
         groupname = self.find_name_from_gid(gid)
-        print "[D] add_user_to_gid: looked up %s and found %s" % (gid, groupname)
         self.add_user_to_group(groupname, user)
         
     def add_user_to_group(self, groupname, user):
-        print "[D] add_user_to_group passed %s, %s" % (groupname, user)
         m = self.data["group"][groupname]["members"]
         m.append(user)
         self.data["group"][groupname]["members"] = m

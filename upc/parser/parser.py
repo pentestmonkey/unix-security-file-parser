@@ -43,7 +43,7 @@ class parser:
         if "key_values" in opts.keys() and opts["key_values"]:
             newlines = []
             for line in lines:
-                m = re.search("^\s*(\S+)\s+(.*?)\s*$", line) 
+                m = re.search("^\s*(\S+?)(?:\s+|=)(.*?)\s*$", line) 
                 if m:
                     newlines.append([m.group(1), m.group(2)])
             lines = newlines

@@ -754,8 +754,8 @@ issue_template = {
           },
        }
     },
-    'UPC526': {
-       'title': "IPv6 Enabled",
+    'UPC533': {
+       'title': "SSH Allows GatewayPorts",
        'description': '''TODO''',
        'recommendation': '''TODO''',
        'supporting_data': {
@@ -765,8 +765,139 @@ issue_template = {
           },
        }
     },
+            
+    'UPC534': {
+       'title': "SSH Allows AllowAgentForwarding",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+             
     'UPC527': {
-       'title': "IPv6 Enabled",
+       'title': "ListenAddress",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+                
+    'UPC526': {
+       'title': "SSH Allows PermitRootLogin",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+                
+    'UPC528': {
+       'title': "SSH Allows PermitTunnel",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+                
+    'UPC529': {
+       'title': "SSH Allows Protocol Version 1",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+                
+    'UPC530': {
+       'title': "SSH Does Not Mandate StrictModes",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+                
+    'UPC531': {
+       'title': "SSH Does Not Use UsePrivilegeSeparation",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+                
+    'UPC532': {
+       'title': "SSH Allows AcceptEnv",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+                                    
+    'UPC527': {
+       'title': "SSH Service Binds To All Interfaces (ListenAddress)",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+
+    'UPC526': {
+       'title': "SSH Allows Root Logins (PermitRootLogin)",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC535': {
+       'title': "Syslog Does Not Log To Remote Server",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC536': {
+       'title': "SELinux Not Enforcing",
        'description': '''TODO''',
        'recommendation': '''TODO''',
        'supporting_data': {
@@ -780,3 +911,5 @@ issue_template = {
 
 
 }
+
+

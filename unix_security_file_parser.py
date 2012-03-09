@@ -2,7 +2,9 @@
 from upc.parser.sshd_config import sshd_config
 from upc.parser.sudoers import sudoers
 from upc.parser.passwd import passwd
+from upc.parser.selinux import selinux
 from upc.parser.group import group
+from upc.parser.syslog import syslog
 from upc.parser.ifconfig import ifconfig
 from upc.parser.shadow import shadow
 from upc.parser.permissions import permissions
@@ -69,16 +71,15 @@ if options.sshd_config_file:
 if options.upc_file:
     s = unix_privesc_check()
     s.parse(options.upc_file, issues, kb)
-    
+
+files = {}    
 if options.directory:
     for f in upc.utils.dirwalk(options.directory):
         m = re.search("/group$", f)
         if m:
             print "[+] Parsing %s as group file" % f
-            s = group()
-            s.parse(f, issues, kb)
+            files["group"] = f
     
-    for f in upc.utils.dirwalk(options.directory):
         print "[D] Processing %s" % f
         
         m = re.search("/passwd$", f)
@@ -86,45 +87,106 @@ if options.directory:
             m2 = re.search("security/passwd$", f)
             if not m2:
                 print "[+] Parsing %s as passwd file" % f
-                s = passwd()
-                s.parse(f, issues, kb)
+                files["passwd"] = f
     
-    for f in upc.utils.dirwalk(options.directory):
         m = re.search("[^g]shadow$", f)
         if m:
             print "[+] Parsing %s as shadow file" % f
-            s = shadow()
-            s.parse(f, issues, kb)
-    
-    for f in upc.utils.dirwalk(options.directory):
-        m = re.search("ifconfig", f)
-        if m:
-            print "[+] Parsing %s as ifconfig file" % f
-            s = ifconfig()
-            s.parse(f, issues, kb)
+            files["shadow"] = f
     
         m = re.search("/upc(?:-[^/]+)$", f)
         if m:
             print "[+] Parsing %s as upc file" % f
-            s = unix_privesc_check()
-            s.parse(f, issues, kb)
+            files["upc"] = f
+            files["ifconfig"] = f # contains ifconfig output if we can't find it elsewhere
+    
+        m = re.search("ifconfig", f)
+        if m:
+            print "[+] Parsing %s as ifconfig file" % f
+            files["ifconfig"] = f
     
         m = re.search("sshd_config$", f)
         if m:
             print "[+] Parsing %s as sshd_config file" % f
-            s = sshd_config()
-            s.parse(f, issues, kb)
+            files["sshd_config"] = f
     
         m = re.search("sudoers$", f)
         if m:
             print "[+] Parsing %s as sudoers file" % f
-            s = sudoers()
-            s.parse(f, issues, kb)
+            files["sudoers"] = f
     
         m = re.search("(perms.txt|all-files.txt)$", f)
         if m:
             print "[+] Parsing %s as permissions file" % f
+            files["perms"] = f
+
+        m = re.search("/syslog", f)
+        if m:
+            print "[+] Parsing %s as syslog file" % f
+            files["syslog"] = f
+
+        m = re.search("/selinux", f)
+        if m:
+            print "[+] Parsing %s as selinux file" % f
+            files["selinux"] = f
+
+# We need to parse the files in the particular order
+file_order = []
+file_order.append("group")
+file_order.append("passwd")
+file_order.append("shadow")
+file_order.append("ifconfig")
+file_order.append("upc")
+file_order.append("sshd_config")
+file_order.append("sudoers")
+file_order.append("perms")
+file_order.append("syslog")
+file_order.append("selinux")
+
+for name in file_order:
+    if not name in files.keys():
+        continue
+    
+    f = files[name]
+    
+    if name == "group":
+        s = group()
+        s.parse(f, issues, kb)
+    
+    if name == "passwd":
+        s = passwd()
+        s.parse(f, issues, kb)
+    
+    if name == "shadow":
+        s = shadow()
+        s.parse(f, issues, kb)
+    
+    if name == "ifconfig":
+        s = ifconfig()
+        s.parse(f, issues, kb)
+    
+    if name == "upc":
+        s = unix_privesc_check()
+        s.parse(f, issues, kb)
+    
+    if name == "sshd_config":
+            s = sshd_config()
+            s.parse(f, issues, kb)
+    
+    if name == "sudoers":
+            s = sudoers()
+            s.parse(f, issues, kb)
+    
+    if name == "perms":
             s = permissions()
+            s.parse(f, issues, kb)
+    
+    if name == "syslog":
+            s = syslog()
+            s.parse(f, issues, kb)
+    
+    if name == "selinux":
+            s = selinux()
             s.parse(f, issues, kb)
     
 filename = "%s.html" % options.report_file_stem

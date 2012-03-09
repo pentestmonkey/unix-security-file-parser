@@ -24,9 +24,5 @@ class group(parser):
 			self.kb.data["group"][group]["gid"] = gid
 			self.kb.data["group"][group]["members"] = []
 
-			print "[D] parse2: %s" % members
 			for user in members.split(","):
-				print "[D] parse: adding %s to %s" % (user, group)
 				self.kb.add_user_to_group(group, user)
-
-		print self.kb.data["group"]
