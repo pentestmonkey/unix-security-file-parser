@@ -5,6 +5,7 @@ from upc.parser.passwd import passwd
 from upc.parser.selinux import selinux
 from upc.parser.group import group
 from upc.parser.syslog import syslog
+from upc.parser.mount import mount
 from upc.parser.ifconfig import ifconfig
 from upc.parser.shadow import shadow
 from upc.parser.permissions import permissions
@@ -72,6 +73,10 @@ if options.upc_file:
     s = unix_privesc_check()
     s.parse(options.upc_file, issues, kb)
 
+if options.mount_file:
+    s = mount()
+    s.parse(options.mount_file, issues, kb)
+
 files = {}    
 if options.directory:
     for f in upc.utils.dirwalk(options.directory):
@@ -130,6 +135,11 @@ if options.directory:
             print "[+] Parsing %s as selinux file" % f
             files["selinux"] = f
 
+        m = re.search("/mount", f)
+        if m:
+            print "[+] Parsing %s as mount file" % f
+            files["mount"] = f
+
 # We need to parse the files in the particular order
 file_order = []
 file_order.append("group")
@@ -142,6 +152,7 @@ file_order.append("sudoers")
 file_order.append("perms")
 file_order.append("syslog")
 file_order.append("selinux")
+file_order.append("mount")
 
 for name in file_order:
     if not name in files.keys():
@@ -187,6 +198,10 @@ for name in file_order:
     
     if name == "selinux":
             s = selinux()
+            s.parse(f, issues, kb)
+    
+    if name == "mount":
+            s = mount()
             s.parse(f, issues, kb)
     
 filename = "%s.html" % options.report_file_stem

@@ -19,6 +19,7 @@ def parseOptions():
     fileopts.add_option("-P", "--perms",       dest = "perms_file",       default = False, help = "Output of: find / -ls")
     fileopts.add_option("-H", "--sshd_config", dest = "sshd_config_file", default = False, help = "/etc/ssh/sshd_config")
     fileopts.add_option("-u", "--upc",         dest = "upc_file",         default = False, help = "Output of: unix-privesc-check standard|detailed")
+    fileopts.add_option("-m", "--mount",       dest = "mount_file",       default = False, help = "Output of: mount")
     fileopts.add_option("-i", "--ifconfig",    dest = "ifconfig_file",    default = False, help = "Output of: ifconfig -a")
 
     bulkopts.add_option("-d", "--directory",   dest = "directory",   help = "Guess files to parse in given directory (don't use /!)")
@@ -38,14 +39,14 @@ def parseOptions():
     fileopt_used = 0
     bulkopt_used = 0
     
-    if options.group_file or options.ifconfig_file or options.passwd_file or options.shadow_file or options.sudoers_file or options.perms_file or options.sshd_config_file or options.upc_file:
+    if options.passwd_file or options.group_file or options.shadow_file or options.sudoers_file or options.perms_file or options.sshd_config_file or options.upc_file or options.mount_file or options.ifconfig_file:
         fileopt_used = 1
     
     if options.directory or options.tarball:
         bulkopt_used = 1
     
     if not (fileopt_used ^ bulkopt_used):
-        print "[E] Specify something to look at.  At least one of: -p, -s, -S, -P, -H, -c *OR* one of: -d, -t.  -h for help."
+        print "[E] Specify something to look at.  At least one of: -p, -g, -s, -S, -P, -H, -u, -m, -i *OR* one of: -d, -t.  -h for help."
         sys.exit()
 
     return options
