@@ -776,20 +776,7 @@ issue_template = {
              'preamble': "TODO:",
           },
        }
-    },
-             
-    'UPC527': {
-       'title': "ListenAddress",
-       'description': '''TODO''',
-       'recommendation': '''TODO''',
-       'supporting_data': {
-          'text_line': {
-             'section': "description",
-             'preamble': "TODO:",
-          },
-       }
-    },
-                
+    },              
     'UPC526': {
        'title': "SSH Allows PermitRootLogin",
        'description': '''TODO''',
