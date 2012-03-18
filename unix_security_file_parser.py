@@ -4,6 +4,7 @@ from upc.parser.sudoers import sudoers
 from upc.parser.passwd import passwd
 from upc.parser.selinux import selinux
 from upc.parser.group import group
+from upc.parser.snmpd import snmpd
 from upc.parser.syslog import syslog
 from upc.parser.mount import mount
 from upc.parser.ifconfig import ifconfig
@@ -77,6 +78,10 @@ if options.mount_file:
     s = mount()
     s.parse(options.mount_file, issues, kb)
 
+if options.snmpd_file:
+    s = snmpd()
+    s.parse(options.snmpd_file, issues, kb)
+
 files = {}    
 if options.directory:
     for f in upc.utils.dirwalk(options.directory):
@@ -140,6 +145,11 @@ if options.directory:
             print "[+] Parsing %s as mount file" % f
             files["mount"] = f
 
+        m = re.search("/snmpd.conf", f)
+        if m:
+            print "[+] Parsing %s as snmpd file" % f
+            files["snmpd"] = f
+
 # We need to parse the files in the particular order
 file_order = []
 file_order.append("group")
@@ -153,6 +163,7 @@ file_order.append("perms")
 file_order.append("syslog")
 file_order.append("selinux")
 file_order.append("mount")
+file_order.append("snmpd")
 
 for name in file_order:
     if not name in files.keys():
@@ -202,6 +213,10 @@ for name in file_order:
     
     if name == "mount":
             s = mount()
+            s.parse(f, issues, kb)
+    
+    if name == "snmpd":
+            s = snmpd()
             s.parse(f, issues, kb)
     
 filename = "%s.html" % options.report_file_stem
