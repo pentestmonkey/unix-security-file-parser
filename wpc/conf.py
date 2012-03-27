@@ -1004,9 +1004,6 @@ issue_template = {
           },
        }
     },
-              
-
-                  
     'UPC546': {
        'title': "",
        'description': '''TODO''',
@@ -1030,8 +1027,8 @@ issue_template = {
        }
     },
     'UPC544': {
-       'title': "",
-       'description': '''SNMP Daemon Uses Default Community String''',
+       'title': "SNMP Daemon Uses Default Community String",
+       'description': '''TODO''',
        'recommendation': '''TODO''',
        'supporting_data': {
           'text_line': {
@@ -1041,8 +1038,19 @@ issue_template = {
        }
     },
     'UPC543': {
-       'title': "",
-       'description': '''SNMP Daemon Does Not Restrict Source IP Address''',
+       'title': "SNMP Daemon Does Not Restrict Source IP Address",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC551': {
+       'title': "Anaconda Configuration File Found",
+       'description': '''File may contain root password hash.''',
        'recommendation': '''TODO''',
        'supporting_data': {
           'text_line': {
