@@ -1103,6 +1103,17 @@ issue_template = {
           },
        }
     },
+    'UPC556': {
+       'title': "Network Sniffing Tools Installed",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
 
 
 }

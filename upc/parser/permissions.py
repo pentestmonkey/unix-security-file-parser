@@ -53,6 +53,9 @@ class permissions(parser):
 		for f in self.query_perms(filename, {"matches": ["file"], "custom_re": ("/anaconda-ks.cfg$")}):
 			self.report.get_by_id("UPC551").add_supporting_data('text_line', [self.kb, f.get_line()])
 
+		for prog in ("tcpdump", "wireshark", "nettl", "snoop"):
+			for f in self.query_perms(filename, {"matches": ["file"], "custom_re": ("/%s$" % prog)}):
+				self.report.get_by_id("UPC556").add_supporting_data('text_line', [self.kb, f.get_line()])
 
 		# TODO files that probably contains passwords or other useful info
 
