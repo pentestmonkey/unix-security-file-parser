@@ -29,6 +29,7 @@ class passwd(parser):
 			self.kb.data["user"][user]["gecos"] = gecos
 			self.kb.data["user"][user]["homedir"] = homedir
 			self.kb.data["user"][user]["shell"] = shell
+			self.kb.data["user"][user]["is_in_passwd"] = 1
 			
 			self.kb.add_user_to_gid(gid, user)
 					

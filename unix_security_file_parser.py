@@ -42,13 +42,13 @@ report = report()
 issues = report.get_issues()
 kb = knowledge_base()
 
-if options.passwd_file:
-    s = passwd()
-    s.parse(options.passwd_file, issues, kb)
-    
 if options.group_file:
     s = group()
     s.parse(options.group_file, issues, kb)
+    
+if options.passwd_file:
+    s = passwd()
+    s.parse(options.passwd_file, issues, kb)
     
 if options.shadow_file:
     s = shadow()

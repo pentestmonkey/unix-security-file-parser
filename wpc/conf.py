@@ -1059,6 +1059,28 @@ issue_template = {
           },
        }
     },
+    'UPC552': {
+       'title': "/etc/shadow Contains Entries That Are Missing From /etc/passwd",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC553': {
+       'title': "/etc/passwd Contains Entries That Are Missing From /etc/shadow",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
 
 
 }

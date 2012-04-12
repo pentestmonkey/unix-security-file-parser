@@ -54,7 +54,8 @@ class shadow(parser):
 			expiry_date      = fields[7]
 			reserved         = fields[8]
 			
-			self.kb.data["user"][user] = {}
+			if not user in self.kb.data["user"].keys():
+				self.kb.data["user"][user] = {}
 			self.kb.data["user"][user]["shadow_password"] = password
 			self.kb.data["user"][user]["password_changed"] = password_changed
 			self.kb.data["user"][user]["min_age"] = min_age
@@ -63,6 +64,7 @@ class shadow(parser):
 			self.kb.data["user"][user]["grace_period"] = grace_period
 			self.kb.data["user"][user]["expiry_date"] = expiry_date
 			self.kb.data["user"][user]["reserved"] = reserved
+			self.kb.data["user"][user]["is_in_shadow"] = 1
 			
 			# Blank password
 			if fields[1] == "":
@@ -96,4 +98,14 @@ class shadow(parser):
 		# Mixture of hashes used
 		if crypt_std_des_used + crypt_ext_des_used + md5_hash_used + blowfish2_used + blowfish2a_used + sha256_used + sha512_used > 1:
 			self.report.get_by_id("UPC512").add_supporting_data('none', [self.kb])
-				
+
+		for user in self.kb.data["user"].keys():
+			if "is_in_passwd" in self.kb.data["user"][user] and self.kb.data["user"][user]["is_in_passwd"] == 1:
+				if not "is_in_shadow" in self.kb.data["user"][user].keys():
+					self.report.get_by_id("UPC553").add_supporting_data('text_line', [self.kb, user])
+					
+			if "is_in_shadow" in self.kb.data["user"][user] and self.kb.data["user"][user]["is_in_shadow"] == 1:
+				if not "is_in_passwd" in self.kb.data["user"][user].keys():
+					self.report.get_by_id("UPC552").add_supporting_data('text_line', [self.kb, user])
+
+		
