@@ -44,4 +44,8 @@ class passwd(parser):
 			# User has shell
 			if fields[6] != "/bin/false":
 				self.report.get_by_id("UPC509").add_supporting_data('text_line', [self.kb, line])
+			
+			m = re.search("^#", user)
+			if m:
+				self.report.get_by_id("UPC554").add_supporting_data('text_line', [self.kb, line])
 				

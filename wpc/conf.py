@@ -1081,6 +1081,28 @@ issue_template = {
           },
        }
     },
+    'UPC554': {
+       'title': "Attempt To Use Comments in /etc/passwd",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC555': {
+       'title': "Attempt To Use Comments in /etc/shadow",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
 
 
 }

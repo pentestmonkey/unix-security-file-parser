@@ -95,6 +95,11 @@ class shadow(parser):
 			elif fields[1] != "!" and fields[1] != "*":
 				self.report.get_by_id("UPC511").add_supporting_data('text_line', [self.kb, line])
 				
+			m = re.search("^#", user)
+			if m:
+				self.report.get_by_id("UPC555").add_supporting_data('text_line', [self.kb, line])
+
+				
 		# Mixture of hashes used
 		if crypt_std_des_used + crypt_ext_des_used + md5_hash_used + blowfish2_used + blowfish2a_used + sha256_used + sha512_used > 1:
 			self.report.get_by_id("UPC512").add_supporting_data('none', [self.kb])
