@@ -1114,6 +1114,28 @@ issue_template = {
           },
        }
     },
+    'UPC557': {
+       'title': "File Found That May Contain Cleartext Passwords Or Keys",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC558': {
+       'title': "Files Found That May Contain ACLs For Access From Network",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
 
 
 }

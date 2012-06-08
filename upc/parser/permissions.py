@@ -46,6 +46,14 @@ class permissions(parser):
 			for f in self.query_perms(filename, {"matches": ["file"], "custom_re": ("/%s$" % prog)}):
 				self.report.get_by_id("UPC520").add_supporting_data('text_line', [self.kb, f.get_line()])
 
+		for prog in (".rhosts", ".shosts"):
+			for f in self.query_perms(filename, {"matches": ["file"], "custom_re": ("/%s$" % prog)}):
+				self.report.get_by_id("UPC558").add_supporting_data('text_line', [self.kb, f.get_line()])
+
+		for prog in (".netrc", "id_dsa", "id_rsa"):
+			for f in self.query_perms(filename, {"matches": ["file"], "custom_re": ("/%s$" % prog)}):
+				self.report.get_by_id("UPC557").add_supporting_data('text_line', [self.kb, f.get_line()])
+
 		for prog in ("g\+\+", "g\+\+\d\d", "g\+\+-\d\.\d", "x86_64-redhat-linux-g\+\+\d\d", "gcc", "javac"):
 			for f in self.query_perms(filename, {"matches": ["file"], "custom_re": ("/%s$" % prog)}):
 				self.report.get_by_id("UPC521").add_supporting_data('text_line', [self.kb, f.get_line()])
@@ -53,7 +61,7 @@ class permissions(parser):
 		for f in self.query_perms(filename, {"matches": ["file"], "custom_re": ("/anaconda-ks.cfg$")}):
 			self.report.get_by_id("UPC551").add_supporting_data('text_line', [self.kb, f.get_line()])
 
-		for prog in ("tcpdump", "wireshark", "nettl", "snoop"):
+		for prog in ("tcpdump", "wireshark", "nettl", "snoop", "iptrace"):
 			for f in self.query_perms(filename, {"matches": ["file"], "custom_re": ("/%s$" % prog)}):
 				self.report.get_by_id("UPC556").add_supporting_data('text_line', [self.kb, f.get_line()])
 

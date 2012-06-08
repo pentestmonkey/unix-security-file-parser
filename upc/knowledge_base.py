@@ -11,7 +11,7 @@ class knowledge_base():
         self.data["filenames"].append(file)
         
     def add_to_ulist(self, name, value):
-        if not self.data[name]:
+        if not name in self.data.keys():
             self.data[name] = []
         self.data[name].append(value)
         self.data[name] = list(set(self.data[name]))
