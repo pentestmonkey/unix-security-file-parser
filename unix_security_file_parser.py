@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from upc.parser.sshd_config import sshd_config
+from upc.parser.sysctl import sysctl
 from upc.parser.sudoers import sudoers
 from upc.parser.passwd import passwd
 from upc.parser.selinux import selinux
@@ -70,6 +71,10 @@ if options.sshd_config_file:
     s = sshd_config()
     s.parse(options.sshd_config_file, issues, kb)
     
+if options.sysctl_file:
+    s = sysctl()
+    s.parse(options.sysctl_file, issues, kb)
+    
 if options.upc_file:
     s = unix_privesc_check()
     s.parse(options.upc_file, issues, kb)
@@ -120,6 +125,11 @@ if options.directory:
             print "[+] Parsing %s as sshd_config file" % f
             files["sshd_config"] = f
     
+        m = re.search("/sysctl-a", f)
+        if m:
+            print "[+] Parsing %s as sysctl file" % f
+            files["sysctl"] = f
+    
         m = re.search("sudoers$", f)
         if m:
             print "[+] Parsing %s as sudoers file" % f
@@ -158,6 +168,7 @@ file_order.append("shadow")
 file_order.append("ifconfig")
 file_order.append("upc")
 file_order.append("sshd_config")
+file_order.append("sysctl")
 file_order.append("sudoers")
 file_order.append("perms")
 file_order.append("syslog")
@@ -193,6 +204,10 @@ for name in file_order:
     
     if name == "sshd_config":
             s = sshd_config()
+            s.parse(f, issues, kb)
+    
+    if name == "sysctl":
+            s = sysctl()
             s.parse(f, issues, kb)
     
     if name == "sudoers":

@@ -1136,6 +1136,50 @@ issue_template = {
           },
        }
     },
+    'UPC559': {
+       'title': "SysRq Key Enabled",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC560': {
+       'title': "Kernel Module Loading Is Enabled",
+       'description': '''TODO''',
+       'recommendation': '''Set to 0 at boot time to prevent loading of malicious modules or unloading of required modules.''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC561': {
+       'title': "Processes Allowed to Map to Virtual Address 0",
+       'description': '''TODO''',
+       'recommendation': '''4096 or other non-zero value.  http://wiki.debian.org/mmap_min_addr''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC562': {
+       'title': "Kernel Memory Addresses Are Not Hidden",
+       'description': '''Knowledge of kernel addresses may help to exploit certain classes of vulnerability.''',
+       'recommendation': '''Set to 1''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
 
 
 }
