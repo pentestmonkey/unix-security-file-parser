@@ -16,7 +16,7 @@ class sudoers(parser):
 			if re.search("^\S+\s.*NOPASSWD:", line):
 				self.report.get_by_id("UPC502").add_supporting_data('text_line', [self.kb, line])
 				
-			if re.search("^\S+\sALL=\(ALL\)\s+ALL", line):
+			if re.search("^\S+\s*ALL\s*=\s*\(\s*ALL\s*\)\s*ALL", line):
 				self.report.get_by_id("UPC505").add_supporting_data('text_line', [self.kb, line])
 				
 			if re.search("=.*\bchown\b", line):

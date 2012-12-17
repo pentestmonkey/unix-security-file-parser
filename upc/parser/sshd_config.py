@@ -50,8 +50,20 @@ class sshd_config(parser):
 			if k == "UsePrivilegeSeparation" and v == "no":
 				self.report.get_by_id("UPC531").add_supporting_data('hostname', [self.kb])
 				
+			if k == "UsePAM" and v == "no":
+				self.report.get_by_id("UPC573").add_supporting_data('hostname', [self.kb])
+				
+			if k == "PermitEmptyPasswords" and v == "yes":
+				self.report.get_by_id("UPC574").add_supporting_data('hostname', [self.kb])
+				
+			if k == "PermitBlacklistedKeys" and v == "yes":
+				self.report.get_by_id("UPC575").add_supporting_data('hostname', [self.kb])
+				
 			if k == "AcceptEnv":
 				self.report.get_by_id("UPC532").add_supporting_data('text_line', [self.kb, "%s %s" % (k, v)])
+						
+			if k == "PermitUserEnvironment":
+				self.report.get_by_id("UPC572").add_supporting_data('text_line', [self.kb, "%s %s" % (k, v)])
 						
 		if not "Port" in directives_used.keys():
 			self.report.get_by_id("UPC501").add_supporting_data('hostname', [self.kb])

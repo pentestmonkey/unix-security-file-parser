@@ -556,7 +556,7 @@ issue_template = {
     },
     'UPC508': {
        'title': "User has unshadowed password in /etc/passwd",
-       'description': '''TODO''',
+       'description': '''TODO.  Note that this can be a false-positive on AIX where * and ! safe values to have in /etc/passwd.''',
        'recommendation': '''TODO''',
        'supporting_data': {
           'text_line': {
@@ -567,7 +567,7 @@ issue_template = {
     },
     'UPC509': {
        'title': "User has shell defined in /etc/passwd",
-       'description': '''TODO''',
+       'description': '''TODO.  NB: On AIX and Linux a empty shell field means the default shell (/usr/bin/sh and /bin/sh respectively).''',
        'recommendation': '''TODO''',
        'supporting_data': {
           'text_line': {
@@ -1180,7 +1180,205 @@ issue_template = {
           },
        }
     },
+    'UPC563': {
+       'title': "IP Forwarding Enabled (IPv4)",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC564': {
+       'title': "IP Forwarding Enabled (IPv6)",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
 
+    'UPC565': {
+       'title': "Host Accepts Redirects",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC566': {
+       'title': "Host Does Not Ignore ICMP Broadcasts",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC567': {
+       'title': "Host Does Not Ignore Bogus Error Messages",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC568': {
+       'title': "TCP SYN Cookies Not Used To Mitigate DoS Attacks",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC569': {
+       'title': "Host Accepts Source Routed Packets",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC570': {
+       'title': "Reverse Path Filtering Not Used to Drop Spoofed Packets",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC571': {
+       'title': "Host Accepts 'Secure' Redirects",
+       'description': '''Host will accept ICMP redirects from its default gateway - which can be spoofed''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC572': {
+       'title': "SSH Daemon has PermitUserEnvironment option Enabled",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC573': {
+       'title': "SSH Daemon not configured to use PAM",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC574': {
+       'title': "SSH Daemon Allows Use of Empty Passwords",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC575': {
+       'title': "SSH Daemon Allows Blacklisted SSH Keys To Be Used",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC575': {
+       'title': "Virtual Address Space Randomisation Disabled",
+       'description': '''TODO''',
+       'recommendation': '''Set to 2''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC576': {
+       'title': "Virtual Address Space Randomisation Set Conservatively",
+       'description': '''TODO''',
+       'recommendation': '''Set to 2''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC577': {
+       'title': "Unnecessary Network Services Listening on Network Interface",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC578': {
+       'title': "Insecure Network Services Listening on Network Interface",
+       'description': '''TODO''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
+    'UPC579': {
+       'title': "No Idle Timeout Set On Shell",
+       'description': '''The shell used for the audit did not have the TMOUT environment variable set''',
+       'recommendation': '''TODO''',
+       'supporting_data': {
+          'text_line': {
+             'section': "description",
+             'preamble': "TODO:",
+          },
+       }
+    },
 
 }
 

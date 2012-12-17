@@ -11,10 +11,10 @@ class permissions(parser):
 		
 		#fsobjs = self.query_perms(filename, {"matches": ["world_writeable"]})
 		
-		for f in self.query_perms(filename, {"min_size": 20000000, "matches": ["file", "world_readable"]}):
+		for f in self.query_perms(filename, {"min_size": 20000000, "matches": ["file", "world_readable"], "notmatches": ["proc"]}):
 			self.report.get_by_id("UPC519").add_supporting_data('text_line', [self.kb, f.get_line()])
 
-		for f in self.query_perms(filename, {"matches": ["world_writeable", "directory"], "ignore": ["sticky"]}):
+		for f in self.query_perms(filename, {"matches": ["world_writeable", "directory"], "ignore": ["sticky"], "notmatches": ["proc"]}):
 			self.report.get_by_id("UPC513").add_supporting_data('text_line', [self.kb, f.get_line()])
 
 		for f in self.query_perms(filename, {"matches": ["unknown_owner"]}):
@@ -23,20 +23,20 @@ class permissions(parser):
 		for f in self.query_perms(filename, {"matches": ["unknown_owner"]}):
 			self.report.get_by_id("UPC524").add_supporting_data('text_line', [self.kb, f.get_line()])
 
-		for f in self.query_perms(filename, {"matches": ["world_writeable", "file"]}):
+		for f in self.query_perms(filename, {"matches": ["world_writeable", "file"], "notmatches": ["proc"]}):
 			c = self.report.get_by_id("UPC518").count_supporting_data('text_line')
-			if c < 200:
+			if c < 200000:
 				self.report.get_by_id("UPC518").add_supporting_data('text_line', [self.kb, f.get_line()])
-			elif c == 200:
-				self.report.get_by_id("UPC518").add_supporting_data('text_line', [self.kb, "... Only first 200 listed ..."])
+			elif c == 200000:
+				self.report.get_by_id("UPC518").add_supporting_data('text_line', [self.kb, "... Only first 200000 listed ..."])
 
 		for f in self.query_perms(filename, {"matches": ["world_writeable", "directory", "sticky"]}):
 			self.report.get_by_id("UPC514").add_supporting_data('text_line', [self.kb, f.get_line()])
 
-		for f in self.query_perms(filename, {"matches": ["suid", "file"]}):
+		for f in self.query_perms(filename, {"matches": ["suid", "file"], "notmatches": ["proc"]}):
 			self.report.get_by_id("UPC515").add_supporting_data('text_line', [self.kb, f.get_line()])
 
-		for f in self.query_perms(filename, {"matches": ["sgid", "file"]}):
+		for f in self.query_perms(filename, {"matches": ["sgid", "file"], "notmatches": ["proc"]}):
 			self.report.get_by_id("UPC516").add_supporting_data('text_line', [self.kb, f.get_line()])
 
 		for f in self.query_perms(filename, {"matches": ["sgid", "directory"]}):

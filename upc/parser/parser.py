@@ -65,11 +65,12 @@ class parser:
         regexp['sgid']            = '\s.[r-][w-][xsS-][r-][w-][sS][r-][w-][xtT-]\s'
         regexp['unknown_owner']   = '\s.[r-][w-][xsS-][r-][w-][xsS-][r-][w-][xtT-]\s+\d+\s+\d+'
         regexp['unknown_group']   = '\s.[r-][w-][xsS-][r-][w-][xsS-][r-][w-][xtT-]\s+\d+\s+\S+\s+\d+'
-        
+        regexp['proc']            = '\s/proc/'
+                
         eregexp = {}
         eregexp['min_size'] = '\d+\s+\d+\s+..........\s+\d+\s+\S+\s+\S+\s+(\d+)\s+?\S+\s+\S+\s+\S+\s+/'
 
-        allowed_opts = ["matches", "ignore", "min_size", "custom_re"]        
+        allowed_opts = ["matches", "notmatches", "ignore", "min_size", "custom_re"]        
         # This odd-looking construction is apparently quite fast
         # http://effbot.org/zone/readline-performance.htm
         while 1:
@@ -84,6 +85,13 @@ class parser:
                 # TODO check that matches are valid
                 for opt in opts.keys():
                     if matched and opt in allowed_opts:
+                        if matched and opt == "notmatches":
+                            for s in opts['notmatches']:
+                                m = re.search(regexp[s], line)
+                                if m:
+                                    matched = 0
+                                    break
+                        
                         if matched and opt == "matches":
                             for s in opts['matches']:
                                 m = re.search(regexp[s], line)

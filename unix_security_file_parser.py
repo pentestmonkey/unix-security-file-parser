@@ -10,6 +10,8 @@ from upc.parser.syslog import syslog
 from upc.parser.mount import mount
 from upc.parser.ifconfig import ifconfig
 from upc.parser.shadow import shadow
+from upc.parser.env import env
+from upc.parser.netstat import netstat
 from upc.parser.permissions import permissions
 from upc.parser.unix_privesc_check import unix_privesc_check
 from upc.knowledge_base import knowledge_base 
@@ -54,6 +56,14 @@ if options.passwd_file:
 if options.shadow_file:
     s = shadow()
     s.parse(options.shadow_file, issues, kb)
+    
+if options.env_file:
+    s = env()
+    s.parse(options.env_file, issues, kb)
+    
+if options.netstat_file:
+    s = netstat()
+    s.parse(options.netstat_file, issues, kb)
     
 if options.ifconfig_file:
     s = ifconfig()
@@ -108,6 +118,16 @@ if options.directory:
         if m:
             print "[+] Parsing %s as shadow file" % f
             files["shadow"] = f
+    
+        m = re.search("[^g]env$", f)
+        if m:
+            print "[+] Parsing %s as env file" % f
+            files["env"] = f
+    
+        m = re.search("^netstat", f)
+        if m:
+            print "[+] Parsing %s as netstat file" % f
+            files["netstat"] = f
     
         m = re.search("/upc(?:-[^/]+)$", f)
         if m:
@@ -165,6 +185,8 @@ file_order = []
 file_order.append("group")
 file_order.append("passwd")
 file_order.append("shadow")
+file_order.append("env")
+file_order.append("netstat")
 file_order.append("ifconfig")
 file_order.append("upc")
 file_order.append("sshd_config")
@@ -192,6 +214,14 @@ for name in file_order:
     
     if name == "shadow":
         s = shadow()
+        s.parse(f, issues, kb)
+    
+    if name == "env":
+        s = env()
+        s.parse(f, issues, kb)
+    
+    if name == "netstat":
+        s = netstat()
         s.parse(f, issues, kb)
     
     if name == "ifconfig":
