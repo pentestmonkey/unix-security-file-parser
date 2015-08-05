@@ -43,7 +43,8 @@ class shadow(parser):
 		for line in lines:
 			fields = line.split(":")
 			
-			fields = line.split(":")
+			if len(fields) <= 8:
+				continue
 			user             = fields[0]
 			password         = fields[1]
 			password_changed = fields[2]

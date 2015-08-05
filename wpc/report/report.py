@@ -3,6 +3,7 @@ import xml.etree.cElementTree as etree
 from lxml import etree as letree
 import os.path
 import sys
+import string
 
 
 # A list of issues with some information about the scan
@@ -33,10 +34,11 @@ class report():
         s = etree.Element('scaninfo')
         for k in self.get_info().keys():
             i = etree.Element(k)
-            i.text = self.get_info_item(k)
+            i.text = filter(lambda x: x in string.printable, self.get_info_item(k))
             s.append(i)
         r.append(s)
         r.append(self.get_issues().as_xml())
+	print r
         return r
 
     def as_xml_string(self):

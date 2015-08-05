@@ -36,6 +36,10 @@ class knowledge_base():
     
     def find_name_from_gid(self, gid):
         for g in self.data["group"].keys():
+            if not g in self.data["group"]:	
+                self.data["group"][g] = {}
+            if not "gid" in self.data["group"][g]:	
+                self.data["group"][g]["gid"] = 12345678
             if self.data["group"][g]["gid"] == gid:
                 return g
         return None
@@ -45,6 +49,9 @@ class knowledge_base():
         self.add_user_to_group(groupname, user)
         
     def add_user_to_group(self, groupname, user):
+	if not groupname in self.data["group"]:
+		self.data["group"][groupname] = {}
+		self.data["group"][groupname]["members"] = []
         m = self.data["group"][groupname]["members"]
         m.append(user)
         self.data["group"][groupname]["members"] = m
